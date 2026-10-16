@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en" class="locked">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Zero Secure 2.0 — Inauguration</title>
+<meta name="description" content="Cicada 3301 presents Zero Secure 2.0 — SHIKHARA. The doomsday begins now.">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="Zero Secure 2.0 — Inauguration">
+<meta property="og:description" content="Cicada 3301 presents Zero Secure 2.0. Doomsday begins now.">
+<link rel="icon" href="assets/cicada.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1f66ff;
+  --green-d:#0f9f2e;
+  --green:#2bff5e;
+  --gold:#d9b25c;
+  --serif:'Cinzel','Trajan Pro','Times New Roman',serif;
+  --mono:'Share Tech Mono','Courier New',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#000}
+html.locked,html.locked body{overflow:hidden;height:100%}
+body{background:#000;color:#fff;font-family:var(--mono);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#spacer{height:520vh}
+
+/* ───────────── STAGE (fixed, driven by scroll) ───────────── */
+#stage{position:fixed;inset:0;height:100vh;height:100dvh;overflow:hidden;z-index:1;background:#000;
+  --light:1;--vig:.25;--wm:.2;--fog:0}
+.bg-light{position:absolute;inset:0;opacity:var(--light);
+  background:radial-gradient(120% 90% at 50% 40%,#f8faf6 0%,#e0e6dd 55%,#b8c2b5 100%)}
+.wm{position:absolute;left:50%;top:50%;width:min(88vw,940px);height:auto;transform:translate(-50%,-50%) scale(var(--wms,1));
+  opacity:var(--wm);pointer-events:none;user-select:none;-webkit-user-drag:none}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.10;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.vignette{position:absolute;inset:0;pointer-events:none;opacity:var(--vig);
+  background:radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,.8) 100%)}
+.layer{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+
+/* presents */
+#presents{will-change:opacity,transform,filter}
+.shikhara{position:absolute;top:clamp(22px,6vh,66px);left:0;right:0;display:flex;align-items:center;justify-content:center;gap:clamp(.8rem,3vw,2rem);padding:0 16px}
+.shikhara h2{font:700 clamp(1.25rem,3.9vw,2.8rem)/1 var(--serif);letter-spacing:.6em;text-indent:.6em;color:var(--blue);
+  text-shadow:0 0 22px rgba(31,102,255,.42),0 0 2px rgba(31,102,255,.6)}
+.shikhara .rule{flex:0 1 clamp(30px,12vw,170px);height:1px;background:linear-gradient(90deg,transparent,var(--blue))}
+.shikhara .rule:last-child{background:linear-gradient(270deg,transparent,var(--blue))}
+.presents-line{font:400 clamp(.8rem,1.85vw,1.2rem)/1.4 var(--mono);letter-spacing:.42em;text-indent:.42em;text-transform:uppercase;color:#151515;
+  margin-bottom:clamp(1rem,3.2vh,2rem);text-align:center}
+.presents-line b{font-weight:400;color:#000;border-bottom:1px solid rgba(0,0,0,.45);padding-bottom:3px}
+.title{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:.22em;
+  font:900 clamp(2.2rem,min(7.1vw,13vh),6.6rem)/1.05 var(--serif);letter-spacing:.04em;text-transform:uppercase;text-align:center;padding:0 12px}
+.title .z{color:var(--green-d);text-shadow:0 0 30px rgba(18,168,47,.35)}
+.title .s,.title .v{color:#000}
+.scroll-hint{position:absolute;bottom:clamp(18px,5vh,48px);left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:10px;
+  font:400 .72rem/1 var(--mono);letter-spacing:.5em;text-indent:.5em;text-transform:uppercase;color:#222;opacity:0}
+.hint-in{display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-hint i{display:block;width:1px;height:38px;background:linear-gradient(#000,transparent);transform-origin:top;animation:drip 2s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+/* intro reveal (after curtains open) */
+.rv{opacity:0}
+body.revealed .rv{animation:rise 1.7s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d,0s)}
+body.revealed .rv.fl{animation-name:riseL}
+body.revealed .rv.fr{animation-name:riseR}
+body.revealed .scroll-hint.rv{animation-name:hint}
+@keyframes rise{from{opacity:0;transform:translateY(22px);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes riseL{from{opacity:0;transform:translateX(-60px);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes riseR{from{opacity:0;transform:translateX(60px);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes hint{from{opacity:0}to{opacity:.85}}
+
+/* doomsday */
+.fog{position:absolute;inset:-10%;opacity:var(--fog);animation:drift 16s ease-in-out infinite alternate;
+  background:radial-gradient(50% 34% at 50% 50%,rgba(24,92,46,.55),transparent 72%),radial-gradient(90% 60% at 50% 112%,rgba(10,54,24,.55),transparent 70%),radial-gradient(60% 50% at 12% 20%,rgba(8,40,20,.4),transparent 70%)}
+@keyframes drift{from{transform:translate3d(-2%,1%,0) scale(1)}to{transform:translate3d(2%,-1%,0) scale(1.08)}}
+#doomWrap{opacity:0;will-change:opacity,transform,filter;padding:0 12px}
+.doom-word{position:relative;display:block;text-align:center;white-space:nowrap;
+  font:900 clamp(2.3rem,11.2vw,10rem)/1 var(--serif);letter-spacing:.07em;text-indent:.07em;color:var(--green);
+  text-shadow:0 0 8px rgba(43,255,94,.75),0 0 34px rgba(43,255,94,.5),0 0 90px rgba(20,160,60,.55);animation:flick 7s infinite}
+.doom-word::before,.doom-word::after{content:attr(data-text);position:absolute;inset:0;overflow:hidden;opacity:0;text-shadow:none;pointer-events:none}
+.doom-word::before{color:var(--blue);animation:gl1 5.5s infinite steps(1)}
+.doom-word::after{color:#ff1e3c;animation:gl2 5.5s infinite steps(1)}
+@keyframes flick{0%,90%,100%{opacity:1}91%{opacity:.3}92%{opacity:1}94%{opacity:.55}95%{opacity:1}}
+@keyframes gl1{0%,85%,100%{opacity:0}86%{opacity:.9;transform:translate(-7px,2px);clip-path:inset(10% 0 62% 0)}88%{opacity:.9;transform:translate(6px,-2px);clip-path:inset(56% 0 14% 0)}90%{opacity:.8;transform:translate(-3px,0);clip-path:inset(30% 0 40% 0)}92%{opacity:0}}
+@keyframes gl2{0%,86%,100%{opacity:0}87%{opacity:.8;transform:translate(7px,-1px);clip-path:inset(38% 0 36% 0)}89%{opacity:.8;transform:translate(-6px,2px);clip-path:inset(8% 0 70% 0)}91%{opacity:0}}
+.bar{position:relative;margin-top:clamp(1rem,3.6vh,2.4rem);width:min(94vw,1120px);padding:.5em 0;text-align:center;--bar:0}
+.bar::before{content:"";position:absolute;inset:0;transform:scaleX(var(--bar));filter:drop-shadow(0 0 24px rgba(43,255,94,.55));
+  background:linear-gradient(90deg,transparent,rgba(43,255,94,.88) 13%,#4aff78 50%,rgba(43,255,94,.88) 87%,transparent)}
+.bar p{position:relative;opacity:0;color:#000;font:900 clamp(1.05rem,4.1vw,3rem)/1.1 var(--serif);letter-spacing:.46em;text-indent:.46em;text-transform:uppercase}
+#fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+
+/* ───────────── CURTAIN ───────────── */
+#curtain{position:fixed;inset:0;z-index:100;overflow:hidden;background:#0b0204}
+#curtain.open{pointer-events:none;background:transparent}
+.drape{position:absolute;top:0;bottom:0;width:50.4%;will-change:transform;transition:transform 3.8s cubic-bezier(.7,0,.2,1);
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.6) 0%,transparent 16%,transparent 78%,rgba(0,0,0,.72) 100%),
+    repeating-linear-gradient(90deg,rgba(0,0,0,.58) 0,rgba(255,70,80,.12) 38px,rgba(0,0,0,.34) 76px,rgba(110,0,14,0) 92px,rgba(0,0,0,.58) 130px),
+    linear-gradient(90deg,#4a040e,#8f1022 50%,#4a040e)}
+.drape.l{left:0;transform-origin:left center}
+.drape.r{right:0;transform-origin:right center}
+.drape::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,170,180,.11) 50%,transparent 70%);background-size:260% 100%;animation:sheen 8s linear infinite}
+.drape.l::after,.drape.r::after{content:"";position:absolute;top:0;bottom:0;width:36px}
+.drape.l::after{right:0;background:linear-gradient(90deg,transparent,rgba(0,0,0,.6))}
+.drape.r::after{left:0;background:linear-gradient(270deg,transparent,rgba(0,0,0,.6))}
+@keyframes sheen{from{background-position:130% 0}to{background-position:-130% 0}}
+#curtain.open .drape{transform:scaleX(.1)}
+.spot{position:absolute;inset:0;pointer-events:none;z-index:2;transition:opacity 1.4s;
+  background:radial-gradient(55% 70% at 50% 46%,rgba(255,205,170,.2),transparent 72%)}
+#curtain.opening .spot{opacity:0}
+.pelmet{position:absolute;top:0;left:0;right:0;height:clamp(52px,9vh,88px);z-index:4;
+  background:linear-gradient(180deg,#260106,#6e0b18);border-bottom:3px solid var(--gold);box-shadow:0 12px 34px rgba(0,0,0,.75);
+  transition:transform 1.3s ease 2.6s}
+.pelmet::after{content:"";position:absolute;left:0;right:0;top:100%;height:20px;
+  background:radial-gradient(circle at 50% 0,#6e0b18 0 13px,var(--gold) 13px 15px,transparent 15.5px) 0 0/46px 20px repeat-x}
+#curtain.open .pelmet{transform:translateY(-140%)}
+.cui{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(1.2rem,4vh,2.2rem);padding:0 16px;
+  transition:opacity .9s,transform .9s}
+#curtain.opening .cui{opacity:0;transform:scale(1.06);pointer-events:none}
+.eyebrow{font:400 clamp(.7rem,1.6vw,.95rem)/1.6 var(--mono);letter-spacing:.5em;text-indent:.5em;text-transform:uppercase;color:#e9cf93;text-align:center;
+  text-shadow:0 0 14px rgba(0,0,0,.9)}
+.go-wrap{filter:drop-shadow(0 0 18px rgba(217,178,92,.32));transition:filter .4s}
+.go-wrap:hover{filter:drop-shadow(0 0 30px rgba(255,214,120,.65))}
+.chamfer{--c:15px;clip-path:polygon(var(--c) 0,calc(100% - var(--c)) 0,100% var(--c),100% calc(100% - var(--c)),calc(100% - var(--c)) 100%,var(--c) 100%,0 calc(100% - var(--c)),0 var(--c))}
+.go{position:relative;display:block;border:0;padding:2px;cursor:pointer;background:linear-gradient(135deg,#f8e3a6,#a77a28 45%,#f2d27f);overflow:hidden}
+.go span{position:relative;display:block;padding:1.2em 2.7em;background:linear-gradient(180deg,#2a0309,#12020a);
+  font:700 clamp(.95rem,2.3vw,1.3rem)/1 var(--serif);letter-spacing:.52em;text-indent:.52em;text-transform:uppercase;color:#f6e2ad;--c:13px;clip-path:polygon(var(--c) 0,calc(100% - var(--c)) 0,100% var(--c),100% calc(100% - var(--c)),calc(100% - var(--c)) 100%,var(--c) 100%,0 calc(100% - var(--c)),0 var(--c));transition:color .3s,background .3s}
+.go::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,240,200,.55),transparent);transform:skewX(-20deg);animation:shine 3.6s ease-in-out infinite}
+@keyframes shine{0%,55%{left:-60%}100%{left:130%}}
+.go:hover span{color:#fff;background:linear-gradient(180deg,#42060f,#1a0210)}
+.go:active{transform:scale(.97)}
+.go:focus-visible{outline:2px solid #fff;outline-offset:6px}
+.note{font:400 .7rem/1.4 var(--mono);letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;color:rgba(233,207,147,.55);text-align:center}
+
+/* controls */
+#mute,#replay{position:fixed;z-index:120;font:400 .72rem/1 var(--mono);letter-spacing:.28em;text-transform:uppercase;cursor:pointer;
+  opacity:0;pointer-events:none;transition:opacity 1s,color .3s,border-color .3s}
+#mute{right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));padding:.85em 1.1em;color:#d8ffe2;
+  background:rgba(0,0,0,.55);border:1px solid rgba(43,255,94,.45);backdrop-filter:blur(6px)}
+#mute:hover{border-color:var(--green);color:#fff}
+body.ready #mute{opacity:1;pointer-events:auto}
+#replay{left:50%;transform:translateX(-50%);bottom:max(22px,env(safe-area-inset-bottom));padding:.85em 1.2em;color:rgba(43,255,94,.75);background:none;border:1px solid rgba(43,255,94,.3)}
+#replay:hover{color:#fff;border-color:var(--green)}
+#replay.show{opacity:1;pointer-events:auto}
+noscript{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:#000;color:#2bff5e;font:1rem var(--mono);text-align:center;padding:24px}
+
+@media (max-width:640px){
+  .title{flex-direction:column;align-items:center;gap:.05em;font-size:clamp(3rem,17vw,5rem)}
+  .shikhara h2{letter-spacing:.38em;text-indent:.38em}
+  .go span{padding:1.1em 1.8em;letter-spacing:.4em;text-indent:.4em}
+  #mute{padding:.75em .9em}
+  #replay{bottom:calc(max(16px,env(safe-area-inset-bottom)) + 52px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .doom-word,.doom-word::before,.doom-word::after,.drape::before,.go::after,.fog{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- STAGE: lives behind the curtain -->
+<div id="stage">
+  <div class="bg-light"></div>
+  <img class="wm" id="wm" src="assets/cicada.png" alt="" aria-hidden="true" draggable="false">
+
+  <div class="layer" id="presents">
+    <header class="shikhara">
+      <span class="rule rv" style="--d:0s"></span>
+      <h2 class="rv" style="--d:0s">SHIKHARA</h2>
+      <span class="rule rv" style="--d:0s"></span>
+    </header>
+    <p class="presents-line rv" style="--d:.55s"><b>Cicada 3301</b> presents</p>
+    <h1 class="title">
+      <span class="z rv fl" style="--d:1s">Zero</span>
+      <span class="s rv fr" style="--d:1.45s">Secure</span>
+      <span class="v rv" style="--d:1.95s">2.0</span>
+    </h1>
+    <div class="scroll-hint rv" style="--d:3.6s"><div class="hint-in" id="hint">Scroll<i></i></div></div>
+  </div>
+
+  <div class="layer" id="doom">
+    <div class="fog"></div>
+    <div id="doomWrap">
+      <span class="doom-word" data-text="DOOMSDAY">DOOMSDAY</span>
+    </div>
+    <div class="bar" id="bar"><p id="barText">Begins Now</p></div>
+  </div>
+
+  <canvas id="fx"></canvas>
+  <div class="grain"></div>
+  <div class="vignette"></div>
+</div>
+
+<div id="spacer"></div>
+
+<!-- CURTAIN: backdrop of the Inaugurate button -->
+<div id="curtain">
+  <div class="drape l"></div>
+  <div class="drape r"></div>
+  <div class="spot"></div>
+  <div class="pelmet"></div>
+  <div class="cui">
+    <p class="eyebrow">Cicada 3301<br>Inaugural Ceremony</p>
+    <div class="go-wrap chamfer">
+      <button class="go chamfer" id="go" type="button"><span>Inaugurate</span></button>
+    </div>
+    <p class="note">♪ Sound on</p>
+  </div>
+</div>
+
+<button id="mute" type="button" aria-pressed="false">Sound · On</button>
+<button id="replay" type="button">↑ Replay</button>
+<noscript>Enable JavaScript to attend the inauguration.</noscript>
+
+<script>
+(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const seg = (p, a, b) => clamp((p - a) / (b - a));
+const ease = t => t * t * (3 - 2 * t);
+
+/* ═════════════ SOUND: synthesized menacing score (no audio files) ═════════════ */
+const Sound = (() => {
+  const AC = window.AudioContext || window.webkitAudioContext;
+  let ctx, master, bus, rev, noiseBuf, padF, padG, nG, riser, riserG;
+  let started = false, muted = false, lvl = 0, impacted = false;
+  const MASTER = .5;
+
+  const impulse = (sec, decay) => {
+    const n = Math.floor(ctx.sampleRate * sec), b = ctx.createBuffer(2, n, ctx.sampleRate);
+    for (let c = 0; c < 2; c++) {
+      const d = b.getChannelData(c);
+      for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, decay);
+    }
+    return b;
+  };
+  const brown = () => {
+    const n = ctx.sampleRate * 6, b = ctx.createBuffer(1, n, ctx.sampleRate), d = b.getChannelData(0);
+    let last = 0;
+    for (let i = 0; i < n; i++) { last = (last + .02 * (Math.random() * 2 - 1)) / 1.02; d[i] = last * 6; }
+    return b;
+  };
+  const out = (node, wet = .3) => {
+    node.connect(bus);
+    const s = ctx.createGain(); s.gain.value = wet; node.connect(s); s.connect(rev);
+  };
+  const osc = (type, freq, detune = 0) => {
+    const o = ctx.createOscillator(); o.type = type; o.frequency.value = freq; o.detune.value = detune; return o;
+  };
+
+  function thud(t, v) {
+    const o = osc('sine', 120), g = ctx.createGain();
+    o.frequency.setValueAtTime(120, t); o.frequency.exponentialRampToValueAtTime(40, t + .22);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + .01); g.gain.exponentialRampToValueAtTime(.0008, t + .55);
+    o.connect(g); out(g, .12); o.start(t); o.stop(t + .6);
+  }
+  function beat() {
+    if (!started) return;
+    if (ctx.state === 'running') {
+      const t = ctx.currentTime + .05, v = .18 + .72 * seg(lvl, .15, 1);
+      thud(t, v); thud(t + .32, v * .62);
+    }
+    setTimeout(beat, (2.1 - 1.0 * lvl) * 1000);
+  }
+  const BELLS = [246.94, 293.66, 311.13, 415.3];
+  function bell() {
+    if (!started) return;
+    if (ctx.state === 'running') {
+      const t = ctx.currentTime + .02, f = BELLS[Math.floor(Math.random() * BELLS.length)];
+      const c = osc('sine', f), m = osc('sine', f * 1.414), mg = ctx.createGain(), g = ctx.createGain();
+      mg.gain.setValueAtTime(f * 2.2, t); mg.gain.exponentialRampToValueAtTime(1, t + 3.5);
+      m.connect(mg); mg.connect(c.frequency);
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.09, t + .01); g.gain.exponentialRampToValueAtTime(.0005, t + 6);
+      c.connect(g); out(g, 1.1);
+      c.start(t); m.start(t); c.stop(t + 6.2); m.stop(t + 6.2);
+    }
+    setTimeout(bell, (5 + Math.random() * 7) * 1000);
+  }
+
+  function start() {
+    if (started || !AC) return;
+    try {
+      ctx = new AC(); started = true;
+      master = ctx.createGain(); master.gain.value = 0;
+      const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 6;
+      master.connect(comp); comp.connect(ctx.destination);
+      bus = ctx.createGain(); bus.connect(master);
+      rev = ctx.createConvolver(); rev.buffer = impulse(3.6, 2.4);
+      const revOut = ctx.createGain(); revOut.gain.value = .55; rev.connect(revOut); revOut.connect(master);
+      noiseBuf = brown();
+
+      // sub drone (D1 + A1)
+      const subG = ctx.createGain(); subG.gain.value = .55;
+      const sub = osc('sine', 36.71), sub2 = osc('sine', 55, -14), sub2G = ctx.createGain(); sub2G.gain.value = .45;
+      sub.connect(subG); sub2.connect(sub2G); sub2G.connect(subG); out(subG, .05);
+      sub.start(); sub2.start();
+
+      // dark pad: minor-second cluster + tritone
+      padF = ctx.createBiquadFilter(); padF.type = 'lowpass'; padF.frequency.value = 170; padF.Q.value = 5;
+      padG = ctx.createGain(); padG.gain.value = .14;
+      [73.42, 73.95, 77.78, 103.83].forEach(f => {
+        const o = osc('sawtooth', f, (Math.random() - .5) * 16); o.connect(padF); o.start();
+      });
+      padF.connect(padG); out(padG, .5);
+      const lfo = osc('sine', .06), lfoG = ctx.createGain(); lfoG.gain.value = 90; lfo.connect(lfoG); lfoG.connect(padF.frequency); lfo.start();
+
+      // wind
+      const wn = ctx.createBufferSource(); wn.buffer = noiseBuf; wn.loop = true;
+      const nf = ctx.createBiquadFilter(); nf.type = 'bandpass'; nf.frequency.value = 260; nf.Q.value = .9;
+      nG = ctx.createGain(); nG.gain.value = .1; wn.connect(nf); nf.connect(nG); out(nG, .4); wn.start();
+      const lfo2 = osc('sine', .045), lfo2G = ctx.createGain(); lfo2G.gain.value = 160; lfo2.connect(lfo2G); lfo2G.connect(nf.frequency); lfo2.start();
+
+      // riser (silent until the scroll builds toward doomsday)
+      riser = osc('sawtooth', 90); const rf = ctx.createBiquadFilter(); rf.type = 'lowpass'; rf.frequency.value = 900;
+      riserG = ctx.createGain(); riserG.gain.value = 0; riser.connect(rf); rf.connect(riserG); out(riserG, .5); riser.start();
+
+      ctx.resume();
+      master.gain.setTargetAtTime(muted ? 0 : MASTER, ctx.currentTime + .1, 1.8);
+      thud(ctx.currentTime + .05, .9);
+      setTimeout(beat, 1800); setTimeout(bell, 3200);
+    } catch (e) { started = false; }
+  }
+
+  function whoosh() {
+    if (!started) return;
+    const t = ctx.currentTime, s = ctx.createBufferSource(); s.buffer = noiseBuf; s.loop = true;
+    const f = ctx.createBiquadFilter(); f.type = 'bandpass'; f.Q.value = 1.2;
+    f.frequency.setValueAtTime(180, t); f.frequency.exponentialRampToValueAtTime(1800, t + 2.2); f.frequency.exponentialRampToValueAtTime(240, t + 4.2);
+    const g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.7, t + 1.6); g.gain.linearRampToValueAtTime(0, t + 4.2);
+    s.connect(f); f.connect(g); out(g, .6); s.start(t); s.stop(t + 4.4);
+  }
+
+  function impact() {
+    const t = ctx.currentTime;
+    const o = osc('sine', 95), g = ctx.createGain();
+    o.frequency.setValueAtTime(95, t); o.frequency.exponentialRampToValueAtTime(26, t + 2.4);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(1, t + .02); g.gain.exponentialRampToValueAtTime(.001, t + 3.2);
+    o.connect(g); out(g, .4); o.start(t); o.stop(t + 3.3);
+
+    const s = ctx.createBufferSource(); s.buffer = noiseBuf;
+    const f = ctx.createBiquadFilter(); f.type = 'lowpass';
+    f.frequency.setValueAtTime(2400, t); f.frequency.exponentialRampToValueAtTime(90, t + 2.6);
+    const ng = ctx.createGain(); ng.gain.setValueAtTime(0, t); ng.gain.linearRampToValueAtTime(.9, t + .02); ng.gain.exponentialRampToValueAtTime(.001, t + 3);
+    s.connect(f); f.connect(ng); out(ng, .7); s.start(t); s.stop(t + 3.2);
+
+    const sf = ctx.createBiquadFilter(); sf.type = 'lowpass'; sf.frequency.value = 650;
+    const sg = ctx.createGain(); sg.gain.setValueAtTime(0, t); sg.gain.linearRampToValueAtTime(.16, t + .03); sg.gain.exponentialRampToValueAtTime(.001, t + 3.4);
+    sf.connect(sg); out(sg, .8);
+    [73.42, 77.78, 103.83, 220].forEach(fr => { const so = osc('sawtooth', fr, (Math.random() - .5) * 20); so.connect(sf); so.start(t); so.stop(t + 3.5); });
+  }
+
+  function update(p) {
+    lvl = p;
+    if (!started) return;
+    const t = ctx.currentTime;
+    padF.frequency.setTargetAtTime(170 + 620 * p, t, .6);
+    padG.gain.setTargetAtTime(.14 + .12 * p, t, .6);
+    nG.gain.setTargetAtTime(.1 + .14 * p, t, .6);
+    const r = seg(p, .28, .56);
+    riser.frequency.setTargetAtTime(90 + 780 * r * r, t, .15);
+    riserG.gain.setTargetAtTime(p > .57 ? 0 : .085 * r, t, .2);
+    if (p > .56 && !impacted) { impacted = true; impact(); }
+    else if (p < .35) impacted = false;
+  }
+
+  function setMuted(m) {
+    muted = m;
+    if (started) master.gain.setTargetAtTime(m ? 0 : MASTER, ctx.currentTime, .25);
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (!started) return;
+    if (document.hidden) ctx.suspend(); else if (!muted) ctx.resume();
+  });
+  return { start, whoosh, update, setMuted, get muted() { return muted; } };
+})();
+
+/* ═════════════ SCROLL-DRIVEN SCENES ═════════════ */
+const stage = $('stage'), presents = $('presents'), wm = $('wm'), curtain = $('curtain'),
+      doomWrap = $('doomWrap'), bar = $('bar'), barText = $('barText'), hint = $('hint'), replay = $('replay');
+let target = 0, shown = -1, cur = 0, armed = false;
+
+function onScroll() {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  target = max > 0 ? clamp(scrollY / max) : 0;
+}
+
+function render(p) {
+  // presents fades out first…
+  const pf = ease(seg(p, .08, .38));
+  presents.style.opacity = 1 - pf;
+  presents.style.transform = pf ? `scale(${(1 + .1 * pf).toFixed(4)})` : '';
+  presents.style.filter = pf ? `blur(${(pf * 7).toFixed(2)}px)` : '';
+  presents.style.visibility = pf >= 1 ? 'hidden' : 'visible';
+  if (curtain) { curtain.style.opacity = 1 - pf; curtain.style.visibility = pf >= 1 ? 'hidden' : 'visible'; }
+  // …the screen sinks to black…
+  const bd = ease(seg(p, .22, .58));
+  stage.style.setProperty('--light', (1 - bd).toFixed(4));
+  stage.style.setProperty('--wm', (.2 - .12 * bd).toFixed(4));
+  stage.style.setProperty('--wms', (1 + .18 * p).toFixed(4));
+  stage.style.setProperty('--vig', (.25 + .75 * bd).toFixed(4));
+  stage.style.setProperty('--fog', ease(seg(p, .52, .9)).toFixed(4));
+  // …DOOMSDAY surfaces, then BEGINS NOW
+  const d = ease(seg(p, .56, .76));
+  doomWrap.style.opacity = d;
+  doomWrap.style.transform = `scale(${(1.18 - .18 * d).toFixed(4)})`;
+  doomWrap.style.filter = d < 1 ? `blur(${((1 - d) * 14).toFixed(2)}px)` : '';
+  bar.style.setProperty('--bar', ease(seg(p, .74, .88)).toFixed(4));
+  barText.style.opacity = ease(seg(p, .8, .92));
+  hint.style.opacity = 1 - seg(p, 0, .04);
+  replay.classList.toggle('show', armed && p > .97);
+  Sound.update(p);
+}
+
+/* floating embers for the doomsday scene */
+const fx = $('fx'), g = fx.getContext('2d');
+let W = 0, H = 0, dpr = 1, parts = [];
+function sizeFx() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  W = fx.width = Math.floor(innerWidth * dpr); H = fx.height = Math.floor(innerHeight * dpr);
+  const n = innerWidth < 700 ? 40 : 85;
+  parts = Array.from({ length: n }, () => ({
+    x: Math.random() * W, y: Math.random() * H, r: (.6 + Math.random() * 1.8) * dpr,
+    vy: -(.15 + Math.random() * .55) * dpr, vx: (Math.random() - .5) * .25 * dpr, a: Math.random(), ph: Math.random() * 6.28
+  }));
+}
+function drawFx(t, p) {
+  const lv = ease(seg(p, .5, .9));
+  g.clearRect(0, 0, W, H);
+  if (lv < .01) return;
+  for (const q of parts) {
+    q.y += q.vy; q.x += q.vx + Math.sin(t / 1400 + q.ph) * .25 * dpr;
+    if (q.y < -10) { q.y = H + 10; q.x = Math.random() * W; }
+    const tw = .55 + .45 * Math.sin(t / 600 + q.ph);
+    g.fillStyle = `rgba(60,255,110,${((.12 + .5 * q.a) * tw * lv).toFixed(3)})`;
+    g.beginPath(); g.arc(q.x, q.y, q.r, 0, 6.2832); g.fill();
+  }
+}
+
+function frame(t) {
+  cur += (target - cur) * .07;
+  if (Math.abs(target - cur) < .0004) cur = target;
+  if (cur !== shown) { shown = cur; render(cur); }
+  drawFx(t, cur);
+  requestAnimationFrame(frame);
+}
+
+/* ═════════════ INAUGURATE ═════════════ */
+let begun = false;
+$('go').addEventListener('click', () => {
+  if (begun) return; begun = true;
+  Sound.start();
+  curtain.classList.add('opening');
+  setTimeout(() => { curtain.classList.add('open'); Sound.whoosh(); }, 700);
+  setTimeout(() => document.body.classList.add('revealed'), 2200);
+  setTimeout(() => {
+    document.documentElement.classList.remove('locked');
+    document.body.classList.add('ready');
+    armed = true; onScroll();
+  }, 4800);
+});
+
+$('mute').addEventListener('click', e => {
+  const m = !Sound.muted; Sound.setMuted(m);
+  e.currentTarget.textContent = m ? 'Sound · Off' : 'Sound · On';
+  e.currentTarget.setAttribute('aria-pressed', String(m));
+});
+replay.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+scrollTo(0, 0);
+addEventListener('scroll', onScroll, { passive: true });
+addEventListener('resize', () => { onScroll(); sizeFx(); });
+sizeFx(); render(0); requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
